@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class Buku extends Model
 {

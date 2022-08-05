@@ -61,9 +61,10 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function edit(Buku $buku)
+    public function edit($id)
     {
-        //
+        $items = Buku::findOrFail($id);
+        return view("edit",['items'=>$items]);    
     }
 
     /**
@@ -73,10 +74,13 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Buku $buku)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $items = $request->all();
+        $data = Buku::findOrFail($id);
+        $data->update($items);
+        return redirect()->route('buku.index');
+        }
 
     /**
      * Remove the specified resource from storage.
