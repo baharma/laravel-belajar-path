@@ -10,14 +10,17 @@ class Buku extends Model
 {
     use softDeletes;
     
+    public $incrementing = false;
     protected $guarded=[];
-    protected $hidden=[];
+    protected $casts=[
+        'id' => 'string'
+    ];
 
     public static function boot(){
         parent::boot();
 
-        self::creating(function($model){
-            $model->id = Uuid::uuid4();
+        static::creating(function($model){
+            $model->id = (string)Str::uuid();
         });
     }
 }

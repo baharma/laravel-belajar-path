@@ -84,8 +84,9 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Buku $buku)
+    public function destroy($id)
     {
-        //
+        Buku::whereId($id)->delete();
+        return redirect()->route('buku.index');
     }
 }

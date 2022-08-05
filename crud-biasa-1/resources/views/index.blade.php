@@ -32,7 +32,11 @@
         <td>
             <a href="{{route('buku.edit',$p->id)}}">Edit</a>
             |
-            <a href="{{route('buku.destroy',$p->id)}}">Hapus</a>
+            <form action="{{ route('buku.destroy', $p->id)}}" method="post">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
         </td>   
       </tr>
       @endforeach
