@@ -14,7 +14,11 @@ class CreateBukusTable extends Migration
     public function up()
     {
         Schema::create('bukus', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->uuid('pembuat_id')->nullable();
+            $table->string('gendre');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

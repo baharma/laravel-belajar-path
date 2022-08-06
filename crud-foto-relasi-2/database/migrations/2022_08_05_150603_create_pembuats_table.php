@@ -14,7 +14,10 @@ class CreatePembuatsTable extends Migration
     public function up()
     {
         Schema::create('pembuats', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->text('foto');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
