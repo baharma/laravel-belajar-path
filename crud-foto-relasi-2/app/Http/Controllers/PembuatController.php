@@ -98,6 +98,9 @@ class PembuatController extends Controller
      */
     public function destroy(Pembuat $pembuat)
     {
-        //
+        $item = Pembuat::find($pembuat->id);
+        unlink("public/Image/".$item->foto);
+        Pembuat::where("id",$item->id)->delete();
+        return redirect()->route('pembuat.index');
     }
 }
