@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pembuat;
 use Illuminate\Http\Request;
-
+use File;
 class PembuatController extends Controller
 {
     /**
@@ -73,9 +73,10 @@ class PembuatController extends Controller
      * @param  \App\Pembuat  $pembuat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pembuat $pembuat)
+    public function edit($id)
     {
-        //
+        $items = Pembuat::find($id);
+        return view("pembuat.edit",['items'=>$items]);
     }
 
     /**
@@ -85,9 +86,24 @@ class PembuatController extends Controller
      * @param  \App\Pembuat  $pembuat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pembuat $pembuat)
+    public function update(Request $request, $id)
     {
-        //
+        $pembuat = Pembuat::find($id);
+        $pembuat->name = $request->input('name');
+
+        if($request->hasFile('foto')){
+            $path = 'public/Image/'.$pembuat->foto;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('public/Image/',$filename);
+            $pembuat->foto =$filename;
+        }
+        $pembuat->save();
+        return redirect()->route('pembuat.index');
     }
 
     /**
