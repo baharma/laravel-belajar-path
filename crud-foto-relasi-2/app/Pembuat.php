@@ -12,6 +12,7 @@ class Pembuat extends Model
     use softDeletes;
     public $incrementing = false;
     protected $guarded=[];
+    
     protected $casts=[
         'id'=>'string'
     ];

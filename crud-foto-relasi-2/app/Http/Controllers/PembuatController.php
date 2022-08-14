@@ -14,7 +14,8 @@ class PembuatController extends Controller
      */
     public function index()
     {
-        //
+        $item = Pembuat::all();
+        return view('pembuat.index',['item'=>$item]);
     }
 
     /**
@@ -24,7 +25,7 @@ class PembuatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pembuat.create');
     }
 
     /**
@@ -35,7 +36,24 @@ class PembuatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     $this->validate($request,[
+        'name'  => 'required|min:5',
+        'foto'  => 'mimes:jpg,jpeg,png'
+     ]);
+
+     //apload file 
+    $data = new Pembuat;
+    $data->name = $request->name;
+    if($request->file('foto')){
+        $file = $request->file('foto');
+        $filename= date('YmdHi').$file->getClientOriginalName();
+        $file-> move(public_path('public/Image'), $filename);
+        $data['foto']= $filename;
+    }
+    $data->save();
+
+     return redirect()->route('pembuat.index');
+
     }
 
     /**
