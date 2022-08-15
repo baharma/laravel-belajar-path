@@ -16,7 +16,6 @@ class BukuController extends Controller
     public function index()
     {
         $item = Buku::with(['pembuat1'])->get();
-
         return view('buku.index',['item'=>$item]);
     }
 
@@ -64,9 +63,12 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function edit(Buku $buku)
+    public function edit($id)
     {
-        //
+        $items = Buku::findOrFail($id);
+
+        $data = Pembuat::all();
+        return view('buku.edit',['items'=>$items,'data'=>$data]);
     }
 
     /**
@@ -76,9 +78,12 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Buku $buku)
+    public function update(Request $request,$id)
     {
-        //
+        $data = $request->all();
+        $item = Buku::findOrFail($id);
+        $item->update($data);
+        return redirect()->route('buku.index');
     }
 
     /**
@@ -87,8 +92,10 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Buku $buku)
+    public function destroy($id)
     {
-        //
+        $item = Buku::findOrFail($id);
+        $item->delete();
+        return redirect()->route('buku.index');
     }
 }
