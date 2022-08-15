@@ -88,6 +88,11 @@ class PembuatController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name'  => 'required|min:5',
+            'foto'  => 'mimes:jpg,jpeg,png'
+         ]);
+
         $pembuat = Pembuat::find($id);
         $pembuat->name = $request->input('name');
 

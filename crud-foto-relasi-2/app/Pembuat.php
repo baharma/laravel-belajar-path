@@ -29,8 +29,8 @@ class Pembuat extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comments(): HasMany
+    public function cote()
     {
-        return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Buku::class, 'pembuat_id', 'id');
     }
 }

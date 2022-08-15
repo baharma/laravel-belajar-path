@@ -12,7 +12,7 @@
         <div class="card-body">
           <h5 class="card-title">Buku</h5>
           <p class="card-text">Membuat list buku pastikan membuat nama pembuat dahulu.</p>
-          <a href="#" class="btn btn-primary">Go Buku</a>
+          <a href="{{route('buku.index')}}" class="btn btn-primary">Go Buku</a>
         </div>
       </div>
 </div>

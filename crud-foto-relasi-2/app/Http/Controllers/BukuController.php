@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use Illuminate\Http\Request;
+use App\Pembuat;
 
 class BukuController extends Controller
 {
@@ -14,7 +15,9 @@ class BukuController extends Controller
      */
     public function index()
     {
+        $item = Buku::with(['pembuat1'])->get();
 
+        return view('buku.index',['item'=>$item]);
     }
 
     /**
@@ -24,7 +27,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        //
+        $item = Pembuat::all();
+        return view('buku.create',['item'=>$item]);
     }
 
     /**
@@ -35,7 +39,12 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $data = $request->all();
+        Buku::create($data);
+        return redirect()->route('buku.index');
+        
     }
 
     /**

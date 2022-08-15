@@ -28,8 +28,8 @@ class Buku extends Model
    *
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
    */
-  public function pembuat1(): BelongsTo
+  public function pembuat1() 
   {
-      return $this->belongsTo(User::class, 'pembuat_id', 'id');
+      return $this->belongsTo(Pembuat::class, 'pembuat_id', 'id');
   }  
 }
